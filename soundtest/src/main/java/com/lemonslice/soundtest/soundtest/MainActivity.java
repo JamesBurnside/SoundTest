@@ -21,16 +21,16 @@ public class MainActivity extends Activity {
     Button btnStart;
     Button btnStop;
     Button btnFraction;
-    double bpm = 104.993; //beat per minute
+    double bpm = 148.003; //beat per minute
     double spb = 60.0/bpm; //seconds per beat
-    int intro = 159;
+    int intro = 1346;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mediaPlayerx = MediaPlayer.create(this, R.raw.pd);
+        mediaPlayerx = MediaPlayer.create(this, R.raw.eia);
         int length = mediaPlayerx.getCurrentPosition();
         Double bps = 60.0/bpm;
 
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 mediaPlayerx.stop();
                 mediaPlayerx.release();
-                mediaPlayerx = MediaPlayer.create(MainActivity.this, R.raw.pd);
+                mediaPlayerx = MediaPlayer.create(MainActivity.this, R.raw.eia);
             }
         });
 
