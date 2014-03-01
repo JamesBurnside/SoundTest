@@ -1,16 +1,28 @@
 package com.lemonslice.soundtest.soundtest;
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
+
+    MediaPlayer mediaPlayer = new MediaPlayer();
+    Button btnStart;
+    Button btnStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnStart = (Button)findViewById(R.id.btnStartMusic);
+        btnStop = (Button)findViewById(R.id.btnStopMusic);
+
+        
     }
 
 
