@@ -11,17 +11,20 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    MediaPlayer mediaPlayer = new MediaPlayer();
     MediaPlayer mediaPlayerx = new MediaPlayer();
     Button btnStart;
     Button btnStop;
-    ContentResolver contentResolver;
-    Uri muisicUri;
+    Button btnFraction;
+    double bpm = 104.993; //beat per minute
+    double spb = 60.0/bpm; //seconds per beat
+    int intro = 250;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,52 +33,14 @@ public class MainActivity extends Activity {
         mediaPlayerx = MediaPlayer.create(this, R.raw.pd);
         btnStart = (Button)findViewById(R.id.btnStartMusic);
         btnStop = (Button)findViewById(R.id.btnStopMusic);
-
-//        contentResolver = getContentResolver();
-//        muisicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-//        Cursor cursor = contentResolver.query(muisicUri, null, null, null, null);
-//
-//        if (cursor == null)
-//        {
-//            // query failed, handle error.
-//        }
-//        else if (!cursor.moveToFirst())
-//        {
-//            // no media on the device
-//        }
-//        else
-//        {
-//            int titleColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
-//            int idColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
-//            do {
-//                long thisId = cursor.getLong(idColumn);
-//                String thisTitle = cursor.getString(titleColumn);
-//                // ...process entry...
-//            } while (cursor.moveToNext());
-//        }
-
-
-
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try
-        {
-            mediaPlayer.setDataSource(MediaStore.Audio.Media.DATA);
-
-        } catch (Exception e) {
-            Toast.makeText(this, "no music", Toast.LENGTH_LONG).show();
-        }
-
+        btnFraction = (Button) findViewById(R.id.btnFraction);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try
                 {
-                    //mediaPlayer.prepare(); // might take long! (for buffering, etc)
-                   // mediaPlayerx.prepare(); // might take long! (for buffering, etc)
-                   // mediaPlayer.start();
-                    mediaPlayerx.start();
-                   // mediaPlayerx.start();
+                   mediaPlayerx.start();
 
                 }
                 catch(Exception e)
@@ -88,11 +53,16 @@ public class MainActivity extends Activity {
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mediaPlayer.stop();
                 mediaPlayerx.stop();
-                mediaPlayerx = null;
+                mediaPlayerx.release();
                 mediaPlayerx = MediaPlayer.create(MainActivity.this, R.raw.pd);
+            }
+        });
 
+        btnFraction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                plzGetFraction();
             }
         });
     }
@@ -116,6 +86,18 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public Double plzGetFraction()
+    {
+        int curPos = mediaPlayerx.getCurrentPosition()-intro ;
+        double frac = (curPos % spb*1000.0)/(spb*1000.0);
+
+        Toast.makeText(getApplicationContext(),
+                "CurPos: "+Integer.toString(curPos)+" frac: "+Double.toString(frac),
+                Toast.LENGTH_SHORT).show();
+
+        return frac;
     }
 
 }
