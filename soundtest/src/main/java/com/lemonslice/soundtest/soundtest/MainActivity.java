@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     Button btnFraction;
     double bpm = 104.993; //beat per minute
     double spb = 60.0/bpm; //seconds per beat
-    int intro = 250;
+    int intro = 159;
 
 
     @Override
@@ -31,6 +31,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mediaPlayerx = MediaPlayer.create(this, R.raw.pd);
+        int length = mediaPlayerx.getCurrentPosition();
+        Double bps = 60.0/bpm;
+
+        //Toast.makeText(getApplicationContext(), Integer.toString(intro), Toast.LENGTH_SHORT).show();
         btnStart = (Button)findViewById(R.id.btnStartMusic);
         btnStop = (Button)findViewById(R.id.btnStopMusic);
         btnFraction = (Button) findViewById(R.id.btnFraction);
