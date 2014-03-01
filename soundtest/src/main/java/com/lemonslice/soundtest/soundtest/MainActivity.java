@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     MediaPlayer mediaPlayer = new MediaPlayer();
+    MediaPlayer mediaPlayerx = new MediaPlayer();
     Button btnStart;
     Button btnStop;
     ContentResolver contentResolver;
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mediaPlayerx = MediaPlayer.create(this, R.raw.pd);
         btnStart = (Button)findViewById(R.id.btnStartMusic);
         btnStop = (Button)findViewById(R.id.btnStopMusic);
 
@@ -53,6 +54,8 @@ public class MainActivity extends Activity {
 //            } while (cursor.moveToNext());
 //        }
 
+
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try
         {
@@ -62,13 +65,18 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "no music", Toast.LENGTH_LONG).show();
         }
 
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try
                 {
-                    mediaPlayer.prepare(); // might take long! (for buffering, etc)
-                    mediaPlayer.start();
+                    //mediaPlayer.prepare(); // might take long! (for buffering, etc)
+                   // mediaPlayerx.prepare(); // might take long! (for buffering, etc)
+                   // mediaPlayer.start();
+                    mediaPlayerx.start();
+                   // mediaPlayerx.start();
+
                 }
                 catch(Exception e)
                 {
@@ -80,7 +88,11 @@ public class MainActivity extends Activity {
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mediaPlayer.stop();
+                //mediaPlayer.stop();
+                mediaPlayerx.stop();
+                mediaPlayerx = null;
+                mediaPlayerx = MediaPlayer.create(MainActivity.this, R.raw.pd);
+
             }
         });
     }
