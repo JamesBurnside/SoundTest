@@ -12,12 +12,27 @@ public class MainActivity extends Activity {
     Button btnStart;
     Button btnStop;
     Button btnFraction;
+<<<<<<< HEAD
     Button btnJames;
+=======
+    double bpm = 148.003; //beat per minute
+    double spb = 60.0/bpm; //seconds per beat
+    int intro = 1346;
+
+>>>>>>> 6b9b13e6d39c46b4c1cf1dec8aa304307dfefb08
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
+=======
+        mediaPlayerx = MediaPlayer.create(this, R.raw.eia);
+        int length = mediaPlayerx.getCurrentPosition();
+        Double bps = 60.0/bpm;
+
+        //Toast.makeText(getApplicationContext(), Integer.toString(intro), Toast.LENGTH_SHORT).show();
+>>>>>>> 6b9b13e6d39c46b4c1cf1dec8aa304307dfefb08
         btnStart = (Button)findViewById(R.id.btnStartMusic);
         btnStop = (Button)findViewById(R.id.btnStopMusic);
         btnJames = (Button)findViewById(R.id.btnJames);
@@ -33,7 +48,13 @@ public class MainActivity extends Activity {
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< HEAD
                 GameAudio.stopMedia(getApplicationContext());
+=======
+                mediaPlayerx.stop();
+                mediaPlayerx.release();
+                mediaPlayerx = MediaPlayer.create(MainActivity.this, R.raw.eia);
+>>>>>>> 6b9b13e6d39c46b4c1cf1dec8aa304307dfefb08
             }
         });
 

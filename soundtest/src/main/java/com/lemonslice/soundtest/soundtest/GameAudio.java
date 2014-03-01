@@ -50,7 +50,6 @@ public class GameAudio {
 
         short[] amps = wave.getSampleAmplitudes();
 
-
         if(mean == 0)
         {
             mean = (amps[0] + amps[1])/2.0;
@@ -60,9 +59,6 @@ public class GameAudio {
                 mean = (mean*(i) + amps[i]) / (i+1);
             }
         }
-
-
-
 
         double upperThreshold = mean*2.0;
         double lowerThreshold = mean/2.0;
