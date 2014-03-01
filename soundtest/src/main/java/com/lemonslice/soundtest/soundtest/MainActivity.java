@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -22,7 +25,28 @@ public class MainActivity extends Activity {
         btnStart = (Button)findViewById(R.id.btnStartMusic);
         btnStop = (Button)findViewById(R.id.btnStopMusic);
 
-        
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try
+        {
+            mediaPlayer.setDataSource(MediaStore.Audio.Media.DATA);
+
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "no music", 3);
+        }
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 
